@@ -1,0 +1,46 @@
+body {
+    margin: 3em;
+}
+
+.display{
+    border: 1px solid #999;
+    width:203px;
+    height: 64px;
+    padding:.1em 1em;
+    line-height: 64px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: -1px;
+    margin-top: -1px;
+    text-align: right;
+}
+
+button {
+    border: 1px solid #999;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+}
+
+.number-button{
+    line-height: 42px;
+    height: 42px;
+    width: 64px;
+}
+
+.button-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.operator-buttons{
+    background-color: rgb(206, 17, 38);
+    line-height: 42px;
+    height: 42px;
+    width: 64px;
+}
