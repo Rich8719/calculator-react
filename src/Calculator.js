@@ -2,105 +2,116 @@ import React, { Component } from "react"
 import './calculator.css'
 
 function NumberButtons(props) {
-    return(
-        <button className="number-button">
-            {props.value}
-        </button>
-    )
+  return(
+    <button 
+      className="number-button"
+      onClick={props.onClick}>
+        {props.value}
+    </button>
+  )
 }
 
 function OperatorButtons(props) {
-    return(
-        <button className = "operator-buttons">
-            {props.symbol}
-        </button>
-    )
+  return(
+    <button 
+      className = "operator-buttons">
+        {props.symbol}
+    </button>
+  )
 }
 
 function DisplayScreen(props) {
-    return(
-        <div className = "display">
-            {props.value}
-        </div>
-    )
+  return(
+    <div className = "display">
+      {props.value}
+    </div>
+  )
 }
 
 class Keypad extends Component {
-
-    renderNumberButtons(i){
-        return(
-            <NumberButtons
-                value={i}
-            />
-        )
+  constructor(props) {
+      super(props)
+      this.state = {
+        number: 0,  
     }
+  }
 
-    renderOperatorButtons(i){
-        return(
-            <OperatorButtons symbol={i}/>
-        )
-    }
+  handleClick = (i) => {
+    this.setState({ number: i })
+  }
 
-    render() {
-        return(
-            <div className = 'number-keypad' >
-                <div className = "button-row">
-                    {this.renderNumberButtons(7)}
-                    {this.renderNumberButtons(8)}
-                    {this.renderNumberButtons(9)}
-                    {this.renderOperatorButtons('+')}
-                </div>
-                <div className="button-row">                 
-                    {this.renderNumberButtons(4)}
-                    {this.renderNumberButtons(5)}
-                    {this.renderNumberButtons(6)}
-                    {this.renderOperatorButtons('-')}
-                </div>
-                <div className="button-row">                 
-                    {this.renderNumberButtons(1)}
-                    {this.renderNumberButtons(2)}
-                    {this.renderNumberButtons(3)}
-                    {this.renderOperatorButtons('/')}
-                </div>
-                <div className="button-row">
-                    {this.renderNumberButtons(0)}
-                    {this.renderNumberButtons('A/C')}
-                    {this.renderOperatorButtons('=')}
-                    {this.renderOperatorButtons('X')}
-                </div>
-            </div >
-        )
+  renderNumberButtons(i){
+    return(
+      <NumberButtons
+        value={i} 
+        onClick={() => this.handleClick(i)}
+      />
+    )
+  }
 
-    }
+  renderOperatorButtons(i){
+    return(
+      <OperatorButtons symbol={i}/>
+    )
+  }
+
+  render() {
+    return(
+      <div className = 'keypad' >
+        <div className = "button-row">
+          {this.renderNumberButtons(7)}
+          {this.renderNumberButtons(8)}
+          {this.renderNumberButtons(9)}
+          {this.renderOperatorButtons(<i class="fas fa-plus"></i>)}
+        </div>
+        <div className="button-row">                 
+          {this.renderNumberButtons(4)}
+          {this.renderNumberButtons(5)}
+          {this.renderNumberButtons(6)}
+          {this.renderOperatorButtons(<i class="fas fa-minus"></i>)}
+        </div>
+        <div className="button-row">                 
+          {this.renderNumberButtons(1)}
+          {this.renderNumberButtons(2)}
+          {this.renderNumberButtons(3)}
+          {this.renderOperatorButtons(<i class="fas fa-divide"></i>)}
+        </div>
+        <div className="button-row">
+          {this.renderNumberButtons(0)}
+          {this.renderNumberButtons('a/c')}
+          {this.renderOperatorButtons(<i class="fas fa-equals"></i>)}
+          {this.renderOperatorButtons(<i class="fas fa-times"></i>)}
+        </div>
+      </div>
+    )
+  }
 }
 
 class Display extends Component{
-    
-    renderDisplay(i){
-        return(
-            <DisplayScreen value={i}/>
-        )
-    }
+  renderDisplay(i){
+    return(
+      <DisplayScreen value={i}/>
+    )
+  }
 
-    render() {
-        return(
-            <div>
-                {this.renderDisplay(9)}
-            </div>
-        )
+  render() {
+    return(
+      <div>
+        {this.renderDisplay(this.props.number)}
+      </div>
+      )
     }
-
-}
+  }
 
 class Calculator extends Component{
-    render(){
-        return(
-            <div>
-                <Display/>
-                <Keypad/>
-            </div>
-        )
-    }
+  render(){
+    return(
+      <div>
+        <Display number={0}/>
+        <Keypad/>
+      </div>
+    )
+  }
 }
 
 export default Calculator
